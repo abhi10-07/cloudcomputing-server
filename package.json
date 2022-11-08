@@ -1,0 +1,31 @@
+{
+  "name": "cloud_computing",
+  "version": "1.0.0",
+  "description": "Cloud computing Assignemnt 2",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Abhi",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.204.0",
+    "@aws-sdk/s3-request-presigner": "^3.204.0",
+    "aws-sdk": "^2.1219.0",
+    "axios": "^0.27.2",
+    "concurrently": "^7.2.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16",
+    "redis": "^4.3.1",
+    "sharp": "^0.31.2",
+    "validator": "^13.7.0"
+  }
+}
