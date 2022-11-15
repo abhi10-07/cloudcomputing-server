@@ -16,6 +16,8 @@ const uploadToS3 = (fileBuffer, fileName, mimetype, key) => {
     ContentType: mimetype,
   };
 
+  console.log(fileBuffer, fileName, mimetype);
+
   // console.log(objectParams);
   //Create object upload promise
   (async () => {

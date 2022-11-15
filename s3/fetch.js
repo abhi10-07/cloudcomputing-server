@@ -7,12 +7,18 @@ const s3 = new AWS.S3();
 const fetchSignedData = async (key) => {
   const bucketName = "abhi-10831908";
   const signedUrlExpireSeconds = 60 * 1;
-  const url = s3.getSignedUrl("getObject", {
-    Bucket: bucketName,
-    Key: key,
-    Expires: signedUrlExpireSeconds,
-  });
-  return url;
+  const params = { Bucket: bucketName, Key: key };
+  try {
+    await s3.headObject(params).promise();
+    const url = s3.getSignedUrl("getObject", {
+      Bucket: bucketName,
+      Key: key,
+      Expires: signedUrlExpireSeconds,
+    });
+    return url;
+  } catch (error) {
+    return null;
+  }
 };
 
 const fetchData = async (key) => {

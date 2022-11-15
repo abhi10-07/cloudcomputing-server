@@ -1,3 +1,5 @@
+require("dotenv").config("../.env");
+
 module.exports = {
   awsConfig: {
     region: "ap-southeast-2",

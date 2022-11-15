@@ -60,24 +60,14 @@ router.get("/posts", async (req, res) => {
 
 router.post("/addpost", async (req, res) => {
   const file = req.file;
-  let fileBufferOriginal;
+  let fileBufferOriginal, fileBufferThumbnail;
 
-  switch (file.mimetype.toLowerCase()) {
-    case "jpg":
-    case "jpeg":
-    case "gif":
-    case "svg":
-    case "jpeg":
-    case "png": {
-      fileBufferOriginal = await sharp(file.buffer)
-        .resize({ height: 1920, width: 1080, fit: "contain" })
-        .toBuffer();
-      break;
-    }
-
-    default:
-      break;
-  }
+  fileBufferOriginal = await sharp(file.buffer)
+    .resize({ height: 1920, width: 1080, fit: "contain" })
+    .toBuffer();
+  // fileBufferThumbnail = await sharp(file.buffer)
+  //   .resize({ height: 155, width: 276, fit: "contain" })
+  //   .toBuffer();
 
   const { title, description } = req.body;
   const randomTimestamp = Date.now();
@@ -97,6 +87,7 @@ router.post("/addpost", async (req, res) => {
   const response = await addNewPost(data);
 
   uploadToS3(fileBufferOriginal, fileS3, file.mimetype);
+  // uploadToS3(fileBufferThumbnail, thumbnailS3, file.mimetype);
 
   res.status(200).json({ data: response });
 });
